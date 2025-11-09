@@ -88,11 +88,10 @@ WSGI_APPLICATION = 'blogApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 DATABASES = {
-    'default': dj_database_url.config(
-        # Reads the Neon connection string from DATABASE_URL in your .env
-        default=config('DATABASE_URL', default='sqlite:///db.sqlite3'), 
-        conn_max_age=600,         # Recommended for serverless DBs like Neon
-        conn_health_checks=True,  # Crucial for stable connections
+    'default': dj_database_url.parse(
+        config('DATABASE_URL', default='sqlite:///db.sqlite3'), # Use SQLite locally if no env var is found
+        conn_health_checks=True,
+        conn_max_age=600,
     )
 }
 # NOTE: PostgreSQL config commented out is safe as long as credentials are not uncommented.
