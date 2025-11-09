@@ -23,7 +23,7 @@ SECRET_KEY = config('SECRET_KEY') ### SECURED: Moved hardcoded key to .env
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool) ### SECURED: Use config, default to True for local dev
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [".vercel.app"]
 
 
 # Application definition
