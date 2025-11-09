@@ -5,7 +5,6 @@ Django settings for blogApp project.
 
 from pathlib import Path
 import dj_database_url
-import STATIC_URL # type: ignore
 import os
 from decouple import config ### SECURED: Using config() for all secrets
 
@@ -85,7 +84,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'blogApp.wsgi.application'
 
-TINYMCE_JS_URL = os.path.join(STATIC_URL, "tinymce/tinymce.min.js")
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 DATABASES = {
@@ -112,6 +111,9 @@ STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+TINYMCE_JS_URL = os.path.join(STATIC_URL, "tinymce/tinymce.min.js")
+
 
 # ### FIX: REMOVED CONFLICTING STATICFILES_STORAGE BLOCK (lines 144-151 in original)
 # We will use the Cloudinary setting defined at the bottom.
