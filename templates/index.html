@@ -59,7 +59,13 @@
         <div class='blogs my-5 grid justify-center md:flex md:space-x-6'>
             {% for blog in random_blogs|slice:3 %}
                 <div style="box-shadow:0 5px 30px 0 rgba(0,0,0,.05);" class='hover:scale-105 hover:transform bg-gray-800 p-5 rounded-lg max-w-sm h-auto shadow-2xl transition-all duration-300'>
-                    <a href='/blogpost/{{blog.slug}}'><img class='rounded-lg mb-4' src="{{blog.thumbnail_url}}"></a>
+                    <a href='/blogpost/{{blog.slug}}'>
+                                {% if blog.thumbnail_img %}
+            <!-- Accessing the image URL is correct with .url -->
+            <img src="{{ blog.thumbnail_img.url }}" alt="{{ blog.title }}" class="rounded-lg object-cover w-full h-44 md:w-[350px] md:h-[180px] shadow-lg">
+        {% else %}
+            <img src="{% static 'images/default.png' %}" alt="{{ blog.title }}" class="rounded-lg object-cover w-full h-44 md:w-[350px] md:h-[180px] shadow-lg">
+        {% endif %}</a>
                     <a class='text-blue-100 hover:text-blue-300 transition duration-300' href='/blogpost/{{blog.slug}}'><span class='text-xl font-extrabold'>{{blog.title|slice:80}}</span></a><br>
                     <p class='my-3'>{{blog.meta|slice:180|safe}}</p>
                     <p class='mt-2 mb-4 text-gray-400'>by  <i class="bi bi-person"></i>  <a href='/about' class='group transition-all duration-500 ease-out'><span class='bg-left-bottom bg-gradient-to-r from-cyan-300 to-blue-500 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out group-hover:text-cyan-200'>pachuau_10</span></a> <i class="bi bi-dot"></i> <span><i class="bi bi-calendar4-event"></i> {{blog.time}}</span> <i class="bi bi-dot"></i><i class="bi bi-tag"></i> <a href='/category/{{blog.category}}' class='group transition-all duration-500 ease-out'><span class='bg-left-bottom bg-gradient-to-r from-cyan-300 to-blue-500 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out group-hover:text-cyan-200'>{{blog.category}}</span></a></p>
