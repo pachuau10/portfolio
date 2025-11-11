@@ -155,3 +155,12 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # For your project's static assets (CSS, JS, fonts)
 # ### FIX: This must be the final definition of STATICFILES_STORAGE
 STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+
+
+# blogApp/settings.py
+
+# Tells Django to trust the host header provided by the proxy (Render)
+USE_X_FORWARDED_HOST = True 
+
+# Tells Django to accept the 'https' header from Render, ensuring request.is_secure() is True.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
