@@ -3,23 +3,34 @@
 
 {% block title %}{{ blog.title }}{% endblock %}
 
+{% load cloudinary %} 
+
 {% block head %}
     {{ block.super }}
-
+    
     <meta property="og:title" content="{{ blog.title }}">
     <meta property="og:description" content="{{ blog.meta|default:blog.content|striptags|truncatewords:30 }}">
     <meta property="og:type" content="article">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
     <meta property="og:site_name" content="Pachuau10 Blog">
+
 {% if blog.thumbnail_img %}
-    <meta property="og:image" content="{{ blog.thumbnail_img.url }}">
+    {% comment %} 
+    CRITICAL FIX: Use cl_url filter to force optimization (q_auto:best) 
+    and correct dimensions (1200x630, c_fill). This creates the URL that works.
+    {% endcomment %}
+    {% with optimized_url=blog.thumbnail_img.public_id|cl_url:width=1200,height=630,crop="fill",quality="auto:best",fetch_format="auto" %}
+
+    <meta property="og:image" content="{{ optimized_url }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ blog.title }}">
     <meta name="twitter:description" content="{{ blog.meta|default:blog.content|striptags|truncatewords:30 }}">
-    <meta name="twitter:image" content="{{ blog.thumbnail_img.url }}">
+    <meta name="twitter:image" content="{{ optimized_url }}">
+    
+    {% endwith %}
 {% endif %}
 {% endblock head %}
 
