@@ -2,6 +2,24 @@
 {% load cloudinary %}
 {% block title %}{{blog.title}}{% endblock title %}
 
+{# START: OPEN GRAPH META TAGS FOR SOCIAL SHARING #}
+<meta property="og:title" content="{{ blog.title }}">
+<meta property="og:description" content="{{ blog.meta|safe|striptags|truncatechars:160 }}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+
+{% if blog.thumbnail_img %}
+<meta property="og:image" content="{{ blog.thumbnail_img.url }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+{% endif %}
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ blog.title }}">
+<meta name="twitter:description" content="{{ blog.meta|safe|striptags|truncatechars:160 }}">
+{% if blog.thumbnail_img %}
+<meta name="twitter:image" content="{{ blog.thumbnail_img.url }}">
+{% endif %}
 {% block content %}
 <div class='bg-gray-800 text-white p-8 pt-12 flex flex-col md:px-20 lg:px-36 xl:px-60 2xl:px-80'>
     <span class='text-center text-3xl md:text-4xl font-bold text-cyan-200 hover:text-cyan-300 transition duration-300'><a href='{{blog.slug}}'>{{blog.title}}</a></span>

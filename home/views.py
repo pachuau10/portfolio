@@ -13,10 +13,10 @@ from django.conf import settings # Import settings to access EMAIL_HOST_USER
 # Create your views here.
 def index(request):
     blogs = Blog.objects.all()
-    random_blogs = random.sample(list(blogs), min(3, len(blogs)))
+    latest_posts = Blog.objects.all().order_by('-time')[:3]
     context = {
         'blogs': blogs,
-        'random_blogs': random_blogs
+        'latest_posts': latest_posts
     }
     return render(request, 'index.html', context)
 
