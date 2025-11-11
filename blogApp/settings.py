@@ -25,7 +25,8 @@ DEBUG = config('DEBUG', default=True, cast=bool) ### SECURED: Use config, defaul
 
 # settings.py
 # If you are not using a specific domain, ensure this is set to your Railway domain
-ALLOWED_HOSTS = ['pachuau.up.railway.app', 'web-production-76f9a.up.railway.app'] 
+ALLOWED_HOSTS = ['pachuau.up.railway.app', 'web-production-76f9a.up.railway.app','127.0.0.1',  # <--- ADD THIS LINE
+    'localhost',] 
 
 # These are necessary headers to make Django generate HTTPS URLs
 USE_X_FORWARDED_HOST = True 
