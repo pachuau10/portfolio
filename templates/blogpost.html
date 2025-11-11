@@ -7,7 +7,7 @@
 
 {% block head %}
     {{ block.super }}
-    
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
     <meta property="og:title" content="{{ blog.title }}">
     <meta property="og:description" content="{{ blog.meta|default:blog.content|striptags|truncatewords:30 }}">
     <meta property="og:type" content="article">
